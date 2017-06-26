@@ -1,0 +1,22 @@
+#Spring
+spring:
+    application:
+        name: exam
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost/test
+        password: Kumar000
+#Server
+server:
+    port: 6060
+#    ssl:
+#      port: 8443
+#      key-store: classpath:clientkeystore
+#      key-store-password: abc@123
+#      key-password: abc@123
+    compression:
+        enabled: true
+        min-response-size: 5120
+#LOGGING
+logging:
+    file: exam_log.txt       
