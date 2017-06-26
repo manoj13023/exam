@@ -2,10 +2,6 @@
 spring:
     application:
         name: exam
-    datasource:
-        driverClassName: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost/test
-        password: Kumar000
 #Server
 server:
     port: 6060

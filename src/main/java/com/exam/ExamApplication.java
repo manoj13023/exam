@@ -1,14 +1,14 @@
-package com.exam.spring.boot.example;
+package com.exam;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class App
-{	
+public class ExamApplication
+{
 	public static void main(String[] args)
 	{
-		SpringApplication.run(App.class, args);
-		System.out.println("+++++++++++++++++++++++++++++++started");
+		SpringApplication.run(ExamApplication.class, args);
 	}
+
 }
