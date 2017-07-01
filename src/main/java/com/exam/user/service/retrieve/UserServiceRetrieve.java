@@ -1,19 +1,39 @@
 package com.exam.user.service.retrieve;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.exam.entity.operation.read.EntityReadOperation;
 import com.exam.user.model.User;
 import com.exam.user.service.UserService;
 
 @Transactional
+@Component
+@Repository
 public class UserServiceRetrieve implements UserService
 {
+	@Autowired
+	private EntityReadOperation operation;
+	
 	@Override
 	public User getUserByEmail(String email)
 	{
-		User user = new User();
-		user.setEmail(email);
-		user.setName("Manoj");
-		return user;
+		return operation.getByEmail(email);
+	}
+
+	@Override
+	public void insert(User user)
+	{
+		operation.save(user);	
+	}
+
+	@Override
+	public void update(User user)
+	{
+		User userDbInstance = operation.getByEmail(user.getEmail());
+		userDbInstance.setName(user.getName());
+		operation.save(userDbInstance);
 	}
 }

@@ -15,4 +15,4 @@ server:
         min-response-size: 5120
 #LOGGING
 logging:
-    file: exam_log.txt       
+    file: logs/exam_log.txt       
