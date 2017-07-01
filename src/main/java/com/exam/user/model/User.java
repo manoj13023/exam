@@ -1,62 +1,59 @@
 package com.exam.user.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table
-public class User
-{
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+import com.exam.model.EntityModel;
 
+@Table
+@Entity
+public class User extends EntityModel
+{
 	@NotNull
-	@Size(min = 3, max = 80)
-	private String email;
+	@Size(min = 5, max = 20)
+	@Column(unique = true)
+	private String username;
+	
+	@NotNull
+	@Size(min = 8, max = 30)
+	private String password;
 
 	@NotNull
 	@Size(min = 2, max = 80)
 	private String name;
+	
+	@NotNull
+	@OneToOne
+	private ContactDetails contactDetails;
+	
+	@NotNull
+	private UserStatus userStatus;
+	
+	@NotNull
+	private UserType userType;
 
-	public User()
+	public String getUsername()
 	{
+		return username;
 	}
 
-	public User(long id)
+	public void setUsername(String username)
 	{
-		this.id = id;
+		this.username = username;
 	}
 
-	public User(String email, String name)
+	public String getPassword()
 	{
-		this.email = email;
-		this.name = name;
+		return password;
 	}
 
-	public long getId()
+	public void setPassword(String password)
 	{
-		return id;
-	}
-
-	public void setId(long value)
-	{
-		this.id = value;
-	}
-
-	public String getEmail()
-	{
-		return email;
-	}
-
-	public void setEmail(String value)
-	{
-		this.email = value;
+		this.password = password;
 	}
 
 	public String getName()
@@ -64,9 +61,38 @@ public class User
 		return name;
 	}
 
-	public void setName(String value)
+	public void setName(String name)
 	{
-		this.name = value;
+		this.name = name;
 	}
 
+	public ContactDetails getContactDetails()
+	{
+		return contactDetails;
+	}
+
+	public void setContactDetails(ContactDetails contactDetails)
+	{
+		this.contactDetails = contactDetails;
+	}
+
+	public UserStatus getUserStatus()
+	{
+		return userStatus;
+	}
+
+	public void setUserStatus(UserStatus userStatus)
+	{
+		this.userStatus = userStatus;
+	}
+
+	public UserType getUserType()
+	{
+		return userType;
+	}
+
+	public void setUserType(UserType userType)
+	{
+		this.userType = userType;
+	}
 }

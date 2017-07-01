@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.exam.model.EntityModel;
 import com.exam.user.model.User;
 
 @Repository
@@ -20,9 +21,9 @@ public class EntityReadOperation
 		return _sessionFactory.getCurrentSession();
 	}
 
-	public void insert(User user)
+	public void insert(EntityModel entity)
 	{
-		getSession().save(user);
+		getSession().save(entity);
 		return;
 	}
 
@@ -38,10 +39,10 @@ public class EntityReadOperation
 		return getSession().createQuery("from User").list();
 	}
 
-	public User getByEmail(String email)
+	public User getByEmail(String email, String entityName)
 	{
-		return (User) getSession().createQuery("from User where email = :email").setParameter("email", email)
-				.uniqueResult();
+		return (User) getSession().createQuery("from " + entityName + " where email = :email")
+				.setParameter("email", email).uniqueResult();
 	}
 
 	public User getById(long id)

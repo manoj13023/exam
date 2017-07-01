@@ -20,19 +20,19 @@ public class UserServiceRetrieve implements UserService
 	@Override
 	public User getUserByEmail(String email)
 	{
-		return operation.getByEmail(email);
+		return operation.getByEmail(email, User.class.getSimpleName());
 	}
 
 	@Override
 	public void insert(User user)
 	{
-		operation.save(user);	
+		operation.insert(user);	
 	}
 
 	@Override
 	public void update(User user)
 	{
-		User userDbInstance = operation.getByEmail(user.getEmail());
+		User userDbInstance = operation.getByEmail(user.getEmail(), user.getClass().getSimpleName());
 		userDbInstance.setName(user.getName());
 		operation.save(userDbInstance);
 	}
