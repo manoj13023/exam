@@ -32,7 +32,7 @@ public class UserServiceRetrieve implements UserService
 	@Override
 	public void update(User user)
 	{
-		User userDbInstance = operation.getByEmail(user.getEmail(), user.getClass().getSimpleName());
+		User userDbInstance = operation.getByEmail(user.getContactDetails().getEmail(), user.getClass().getSimpleName());
 		userDbInstance.setName(user.getName());
 		operation.save(userDbInstance);
 	}

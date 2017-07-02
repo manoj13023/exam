@@ -23,8 +23,8 @@ public class User extends EntityModel
 	private String password;
 
 	@NotNull
-	@Size(min = 2, max = 80)
-	private String name;
+	@OneToOne
+	private Name name;
 	
 	@NotNull
 	@OneToOne
@@ -56,12 +56,12 @@ public class User extends EntityModel
 		this.password = password;
 	}
 
-	public String getName()
+	public Name getName()
 	{
 		return name;
 	}
 
-	public void setName(String name)
+	public void setName(Name name)
 	{
 		this.name = name;
 	}
@@ -95,4 +95,5 @@ public class User extends EntityModel
 	{
 		this.userType = userType;
 	}
+
 }

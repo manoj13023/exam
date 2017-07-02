@@ -9,9 +9,9 @@
 	<groupId>exam</groupId>
 	<artifactId>exam</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
-	<name>com.exam.parent</name>
+	<name>Exam root</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -62,4 +62,17 @@
 		<!-- To generate the executable jar....<plugins> <plugin> <groupId>org.springframework.boot</groupId> 
 			<artifactId>spring-boot-maven-plugin</artifactId> </plugin> </plugins> -->
 	</build>
+	<modules>
+		<module>services</module>
+		<module>exam-api</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>3.8.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
