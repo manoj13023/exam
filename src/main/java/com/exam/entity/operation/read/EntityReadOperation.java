@@ -41,7 +41,7 @@ public class EntityReadOperation
 
 	public User getByEmail(String email, String entityName)
 	{
-		return (User) getSession().createQuery("from " + entityName + " where email = :email")
+		return (User) getSession().createQuery("from " + entityName + " where contactDetails.email = :email")
 				.setParameter("email", email).uniqueResult();
 	}
 

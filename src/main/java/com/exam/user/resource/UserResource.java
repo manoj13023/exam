@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exam.user.model.User;
-import com.exam.user.service.retrieve.UserServiceRetrieve;
+import com.exam.user.service.UserServiceRetrieve;
 
 @RestController
 @RequestMapping("/user")

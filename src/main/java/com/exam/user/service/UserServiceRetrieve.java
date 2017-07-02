@@ -1,4 +1,4 @@
-package com.exam.user.service.retrieve;
+package com.exam.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.exam.entity.operation.read.EntityReadOperation;
 import com.exam.user.model.User;
-import com.exam.user.service.UserService;
 
 @Transactional
 @Component
@@ -32,8 +31,9 @@ public class UserServiceRetrieve implements UserService
 	@Override
 	public void update(User user)
 	{
-		User userDbInstance = new User(); //operation.getByEmail(user.getEmail(), user.getClass().getSimpleName());
+		User userDbInstance = operation.getByEmail(user.getContactDetails().getEmail(), user.getClass().getSimpleName());
 		userDbInstance.setName(user.getName());
+		// TODO apply all the user details from request
 		operation.save(userDbInstance);
 	}
 }
