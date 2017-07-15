@@ -12,20 +12,25 @@ import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.exam.user.model.Name;
 import com.exam.user.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @MappedSuperclass
 public class EntityModel
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	protected long id;
-	
-	@DateTimeFormat
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonIgnore
 	protected Date modified;
-	
+
 	@OneToOne
+	@JsonIgnore
 	protected User modifiedBy;
 
 	public long getId()

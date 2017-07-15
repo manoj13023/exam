@@ -2,6 +2,8 @@ package com.exam.entity.operation.read;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,7 @@ import com.exam.model.EntityModel;
 import com.exam.user.model.User;
 
 @Repository
-public class EntityReadOperation
+public class EntityOperation
 {
 	@Autowired
 	private SessionFactory _sessionFactory;
@@ -21,12 +23,14 @@ public class EntityReadOperation
 		return _sessionFactory.getCurrentSession();
 	}
 
+	@Transactional(rollbackOn = Exception.class)
 	public void insert(EntityModel entity)
 	{
 		getSession().save(entity);
 		return;
 	}
-
+	
+	@Transactional
 	public void delete(User user)
 	{
 		getSession().delete(user);
@@ -41,7 +45,7 @@ public class EntityReadOperation
 
 	public User getByEmail(String email, String entityName)
 	{
-		return (User) getSession().createQuery("from " + entityName + " where email = :email")
+		return (User) getSession().createQuery("from " + entityName + " where contactDetails.email = :email")
 				.setParameter("email", email).uniqueResult();
 	}
 
@@ -50,11 +54,13 @@ public class EntityReadOperation
 		return (User) getSession().load(User.class, id);
 	}
 
+	@Transactional
 	public void update(User user)
 	{
 		getSession().update(user);
 	}
 
+	@Transactional
 	public void save(User user)
 	{
 		getSession().saveOrUpdate(user);

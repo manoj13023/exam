@@ -1,21 +1,21 @@
-package com.exam.user.service.retrieve;
+package com.exam.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.exam.entity.operation.read.EntityReadOperation;
+import com.exam.entity.operation.read.EntityOperation;
 import com.exam.user.model.User;
-import com.exam.user.service.UserService;
+import com.exam.user.model.UserStatus;
 
 @Transactional
 @Component
 @Repository
-public class UserServiceRetrieve implements UserService
+public class UserServiceImpl implements UserService
 {
 	@Autowired
-	private EntityReadOperation operation;
+	private EntityOperation operation;
 	
 	@Override
 	public User getUserByEmail(String email)
@@ -26,14 +26,16 @@ public class UserServiceRetrieve implements UserService
 	@Override
 	public void insert(User user)
 	{
+		user.setUserStatus(UserStatus.INITIATED);
 		operation.insert(user);	
 	}
 
 	@Override
 	public void update(User user)
 	{
-		User userDbInstance = new User(); //operation.getByEmail(user.getEmail(), user.getClass().getSimpleName());
+		User userDbInstance = operation.getByEmail(user.getContactDetails().getEmail(), user.getClass().getSimpleName());
 		userDbInstance.setName(user.getName());
+		// TODO apply all the user details from request
 		operation.save(userDbInstance);
 	}
 }
