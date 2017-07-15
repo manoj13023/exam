@@ -2,32 +2,29 @@ package com.exam.user.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.exam.model.EntityModel;
-
-@Entity
-@Table(name = "ContactDetails")
-public class ContactDetails extends EntityModel
+@Embeddable
+public class ContactDetails
 {
 	@NotNull
 	@Size(min = 3, max = 80)
 	@Column(unique = true)
 	private String email;
-	
+
 	@NotNull
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Address> address;
-	
+
 	@NotNull
-	@OneToMany
-	private List<Phone> Phone;
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Phone> phone;
 
 	public String getEmail()
 	{
@@ -51,13 +48,12 @@ public class ContactDetails extends EntityModel
 
 	public List<Phone> getPhone()
 	{
-		return Phone;
+		return phone;
 	}
 
 	public void setPhone(List<Phone> phone)
 	{
-		Phone = phone;
+		this.phone = phone;
 	}
-	
-	
+
 }

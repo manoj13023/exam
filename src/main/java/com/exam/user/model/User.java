@@ -1,13 +1,14 @@
 package com.exam.user.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.exam.model.EntityModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Table
 @Entity
@@ -17,22 +18,20 @@ public class User extends EntityModel
 	@Size(min = 5, max = 20)
 	@Column(unique = true)
 	private String username;
-	
-	@NotNull
-	@Size(min = 8, max = 30)
-	private String password;
 
 	@NotNull
-	@OneToOne
+	@Size(min = 8, max = 30)
+	@JsonIgnore
+	private String password;
+
+	@Embedded
 	private Name name;
-	
-	@NotNull
-	@OneToOne
+
+	@Embedded
 	private ContactDetails contactDetails;
-	
-	@NotNull
-	private UserStatus userStatus;
-	
+
+	private UserStatus userStatus; //TODO should not come from request
+
 	@NotNull
 	private UserType userType;
 

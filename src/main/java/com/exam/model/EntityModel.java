@@ -16,22 +16,22 @@ import com.exam.user.model.Name;
 import com.exam.user.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @MappedSuperclass
 public class EntityModel
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonIgnore
 	protected long id;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonIgnore
 	protected Date modified;
-	
+
 	@OneToOne
 	@JsonIgnore
-	protected Name modifiedBy;
+	protected User modifiedBy;
 
 	public long getId()
 	{
@@ -53,15 +53,14 @@ public class EntityModel
 		this.modified = modified;
 	}
 
-	public Name getModifiedBy()
+	public User getModifiedBy()
 	{
 		return modifiedBy;
 	}
 
-	public void setModifiedBy(Name modifiedBy)
+	public void setModifiedBy(User modifiedBy)
 	{
 		this.modifiedBy = modifiedBy;
 	}
-
 
 }

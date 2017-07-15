@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exam.user.model.User;
-import com.exam.user.service.UserServiceRetrieve;
+import com.exam.user.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/user")
 public class UserResource
 {
 	@Autowired
-	private UserServiceRetrieve userSerive;
+	private UserServiceImpl userSerive;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public User getUser(@RequestParam(value = "email", required = true) String email)

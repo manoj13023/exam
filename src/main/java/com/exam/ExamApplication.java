@@ -20,4 +20,4 @@ public class ExamApplication
     public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf) {
         return hemf.getSessionFactory();
     }
-}
+}				

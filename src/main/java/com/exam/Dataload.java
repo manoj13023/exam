@@ -1,19 +1,17 @@
 package com.exam;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.exam.entity.operation.read.EntityReadOperation;
 import com.exam.model.EntityModel;
 import com.exam.user.model.Address;
+import com.exam.user.model.AddressType;
 import com.exam.user.model.ContactDetails;
 import com.exam.user.model.Name;
 import com.exam.user.model.Phone;
+import com.exam.user.model.PhoneType;
 import com.exam.user.model.User;
 import com.exam.user.model.UserStatus;
 import com.exam.user.model.UserType;
@@ -21,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Dataload
 {
-
 	public static void main(String[] args)
 	{
 		Dataload dataload = new Dataload();
@@ -46,13 +43,13 @@ public class Dataload
 	{
 		User user = new User();
 		user.setUsername("manoj13023");
-		user.setPassword("test");
+		user.setPassword("test12345");
 		user.setName(prepareName());
 		user.setModified(new Date());
-		user.setUserStatus(UserStatus.ACTIVE);
+		user.setUserStatus(UserStatus.INITIATED);
 		user.setUserType(UserType.ADMIN);
 		user.setContactDetails(prepareContactDetails());
-		user.setModifiedBy(prepareName());
+		user.setModifiedBy(user);
 
 		return user;
 	}
@@ -72,6 +69,7 @@ public class Dataload
 		Phone phone = new Phone();
 		phone.setCountryCode("+91");
 		phone.setNumber(9876543210L);
+		phone.setPhoneType(PhoneType.MOB);
 		return Arrays.asList(phone);
 	}
 
@@ -84,6 +82,7 @@ public class Dataload
 		address.setState("KT");
 		address.setCountry("India");
 		address.setZipcode("13123");
+		address.setAddressType(AddressType.RESIDENCIAL);
 
 		return Arrays.asList(address);
 	}
